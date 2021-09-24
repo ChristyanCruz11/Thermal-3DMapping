@@ -1,0 +1,38 @@
+http://documentation.evocortex.com/libirimager2/html/Installation.html#sec_linuxinst
+
+-git clone https://github.com/evocortex/optris_drivers.git
+
+-catkin_make
+
+sudo rmmod uvcvideo; sudo modprobe uvcvideo nodrop=1 (IMPORTANTE ************)
+
+groups
+
+sudo apt-get install cmake freeglut3-dev libusb-1.0-0-dev
+
+https://evocortex.org/products/irimagerdirect-sdk/
+http://evocortex.org/downloads/ (descargo el driver amd64 e instalo)
+
+https://www.programmersought.com/article/35344923172/
+
+-- instalar los drivers camara
+sudo ir_download_calibration
+
+ir_download_calibration -t /tmp -d 18072067.xml
+
+_____________________________________________
+Error:
+https://github.com/evocortex/optris_drivers/issues/30
+
+
+------------------------------------------------
+Para ejecutar
+- rosrun optris_drivers optris_imager_node _xmlConfig:=/home/explorador/catkin_ws/src/optris_drivers/config/generic.xml
+
+- rosrun optris_drivers optris_imager_node _xmlConfig:=/home/explorador/catkin_ws/src/optris_drivers/config/Cali-18072067.xml
+
+- rosrun optris_drivers optris_colorconvert_node _palette:=6 _paletteScaling:=1 _temperatureMin:=20 _temperatureMax:=40
+
+- rosrun optris_drivers optris_imager_node _xmlConfig:=/usr/share/libirimager/cali/Cali-18072067.xml (alternativo con config descargada)
+
+-sudo bash -c 'echo "options uvcvideo nodrop=1" > /etc/modprobe.d/uvcvideo.conf'
