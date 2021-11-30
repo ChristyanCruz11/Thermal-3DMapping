@@ -30,18 +30,6 @@
     <param name="_dev" value="$(arg dev)" />
   </node>
 
-  <node name="pcl_filter" pkg="chapter6_tutorials" type="pcl_filter"
-        output="screen">
-  </node>
-
-  <node name="pcl_downsampling" pkg="chapter6_tutorials" type="pcl_downsampling"
-        output="screen">
-  </node>
-
-  <node name="pcl_stairs" pkg="chapter6_tutorials" type="pcl_stairs"
-        output="screen">
-  </node>
-
   <node pkg="jaguar_ros" type="teleop_jaguar" name="teleop_jaguar"
         output="screen" >
   </node>
