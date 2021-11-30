@@ -1,0 +1,3 @@
+type: "position_controllers/JointPositionController"
+joint: left_rear_track_j
+pid: {p: 100.0, i: 0.01, d: 10.0}

@@ -1,0 +1,702 @@
+<?xml version="1.0" ?>
+<robot name="jaguar">
+  <joint name="left_track_j" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_track"/>
+    <origin rpy="0      0     0" xyz="0    0.245  0.1"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="right_track_j" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_track"/>
+    <origin rpy="0      0     0" xyz="0  -0.245     0.1"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="right_rear_track_j" type="revolute">
+    <parent link="base_link"/>
+    <child link="right_rear_arm"/>
+    <origin rpy="0  0  1.5708" xyz="-0.23  -0.315    0.1"/>
+    <axis xyz="1  0  0"/>
+    <limit effort="-1" lower="-1e+16" upper="+1e+16" velocity="1"/>
+    <dynamics damping=".5"/>
+  </joint>
+  <joint name="left_rear_track_j" type="revolute">
+    <parent link="base_link"/>
+    <child link="left_rear_arm"/>
+    <origin rpy="0  0  1.5708" xyz="-0.23   0.315  0.1"/>
+    <axis xyz="1  0  0"/>
+    <limit effort="-1" lower="-1e+16" upper="+1e+16" velocity="1"/>
+    <dynamics damping=".5"/>
+  </joint>
+  <joint name="right_front_track_j" type="revolute">
+    <parent link="base_link"/>
+    <child link="right_front_arm"/>
+    <origin rpy="0  0  1.5708" xyz="0.23  -0.315   0.1"/>
+    <axis xyz="1  0  0"/>
+    <limit effort="-1" lower="-1e+16" upper="+1e+16" velocity="1"/>
+    <dynamics damping=".5"/>
+  </joint>
+  <joint name="left_front_track_j" type="revolute">
+    <parent link="base_link"/>
+    <child link="left_front_arm"/>
+    <origin rpy="0  0  1.5708" xyz="0.23  0.315  0.1"/>
+    <axis xyz="1  0  0"/>
+    <limit effort="-1" lower="-1e+16" upper="+1e+16" velocity="1"/>
+    <dynamics damping=".5"/>
+  </joint>
+  <joint name="velodyne_j" type="fixed">
+    <parent link="base"/>
+    <child link="top"/>
+    <origin rpy="0  0  0" xyz="0 0 0.029335"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="-1" lower="-1e+16" upper="+1e+16" velocity="1"/>
+    <dynamics damping=".5"/>
+  </joint>
+  <joint name='velodyne_base_j' type='fixed'>
+    <parent link="base_link"/>
+    <child link="base"/>
+    <origin rpy="0      0     0" xyz="0  0  0.2"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="imu_joint" type="fixed">
+    <axis xyz="1 0 0"/> 
+    <origin xyz="0 0 0.19"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+  </joint>
+  <joint name="ir_joint" type="fixed">
+    <axis xyz="1 0 0"/> 
+    <origin xyz="0.3 0 0.03" rpy="0 1.57 0"/>
+    <parent link="base_link"/>
+    <child link="ir_base"/>
+  </joint>
+  <joint name="ir_front_joint" type="fixed">
+    <axis xyz="1 0 0"/> 
+    <origin xyz="0.3 0 0.04" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="ir_front"/>
+  </joint>
+  <link name="base_link">
+    <inertial>
+      <mass value="13.14"/>
+      <origin rpy="1.5708  0      0" xyz="0  0  0.1"/>
+      <inertia ixx="0.17136" ixy="0" ixz="0" iyy="0.544105" iyz="0" izz="0.415662"/>
+    </inertial>
+    <collision name="base_link_collision">
+      <origin rpy="0      0     0" xyz="0   0   0.1"/>
+      <geometry>
+        <box size="0.6 0.37 0.140"/>
+      </geometry>
+    </collision>
+    <visual name="base_link_visual">
+      <origin rpy="0      0     0" xyz="0   0   0.1"/>
+      <geometry>
+        <box size="0.6 0.37 0.140"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="left_track">
+    <inertial>
+      <mass value="6.06"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.001818" ixy="0" ixz="0" iyy="0.032554" iyz="0" izz="0.031391"/>
+    </inertial>
+    <collision name="left_track_collision">
+      <origin rpy="1.5708  0      1.5708" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.06 0.180 0.46"/>
+      </geometry>
+    </collision>
+    <collision name="left_track_collision_1">
+      <origin rpy="1.5708  0      0" xyz="0.23  0    0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.09"/>
+      </geometry>
+    </collision>
+    <collision name="left_track_collision_2">
+      <origin rpy="1.5708  0      0" xyz="-0.23  0    0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.09"/>
+      </geometry>
+    </collision>
+    <visual name="left_track_visual">
+      <origin rpy="1.5708  0      1.5708" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.06 0.180 0.46"/>
+      </geometry>
+    </visual>
+    <visual name="left_track_visual_1">
+      <origin rpy="1.5708  0      0" xyz="0.23  0    0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.09"/>
+      </geometry>
+    </visual>
+    <visual name="left_track_visual_2">
+      <origin rpy="1.5708  0      0" xyz="-0.23  0    0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.09"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="right_track">
+    <inertial>
+      <mass value="6.06"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.001818" ixy="0" ixz="0" iyy="0.032554" iyz="0" izz="0.031391"/>
+    </inertial>
+    <collision name="right_track_collision">
+      <origin rpy="1.5708  0      1.5708" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.06 0.180 0.46"/>
+      </geometry>
+    </collision>
+    <collision name="right_track_collision_1">
+      <origin rpy="1.5708  0      0" xyz="0.23  0    0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.09"/>
+      </geometry>
+    </collision>
+    <collision name="right_track_collision_2">
+      <origin rpy="1.5708  0      0" xyz="-0.23  0    0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.09"/>
+      </geometry>
+    </collision>
+    <visual name="right_track_visual">
+      <origin rpy="1.5708  0      1.5708" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.06 0.180 0.46"/>
+      </geometry>
+    </visual>
+    <visual name="right_track_visual_1">
+      <origin rpy="1.5708  0      0" xyz="0.23  0    0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.09"/>
+      </geometry>
+    </visual>
+    <visual name="right_track_visual_2">
+      <origin rpy="1.5708  0      0" xyz="-0.23  0    0"/>
+      <geometry>
+        <cylinder length="0.06" radius="0.09"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="right_rear_arm">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="1.57079  0    1.57079" xyz="0  0     0"/>
+      <inertia ixx="6.8125e-4" ixy="0" ixz="0" iyy="3.96253e-3" iyz="0" izz="4.53125e-3"/>
+    </inertial>
+    <collision name="collision_right_rear_arm_wheel_1">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0     0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".09"/>
+      </geometry>
+    </collision>
+    <collision name="collision_right_rear_arm_wheel_2">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0.23   0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".035"/>
+      </geometry>
+    </collision>
+    <collision name="right_rear_track_collision">
+      <origin rpy="-1.3293  0      0" xyz="0       0.12157 -0.0257"/>
+      <geometry>
+        <box size="0.06 0.07 0.2233"/>
+      </geometry>
+    </collision>
+    <collision name="right_rear_track_collision_2">
+      <origin rpy="1.3293  0      0" xyz="0       0.12157  0.0277"/>
+      <geometry>
+        <box size="0.06 0.07 0.23"/>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin rpy="0  0  0" xyz="0     0.115  0.001"/>
+      <geometry>
+        <box size=".002 .23 .05"/>
+      </geometry>
+    </visual>
+    <visual name="visual_right_rear_arm_wheel_1">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0     0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".09"/>
+      </geometry>
+    </visual>
+    <visual name="visual_right_rear_arm_wheel_2">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0.23   0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".035"/>
+      </geometry>
+    </visual>
+    <visual name="right_rear_track_visual">
+      <origin rpy="1.3293  0      0" xyz="0       0.12157  0.0277"/>
+      <geometry>
+        <box size="0.06 0.07 0.2233"/>
+      </geometry>
+    </visual>
+    <visual name="right_rear_track_visual_2">
+      <origin rpy="-1.3293  0      0" xyz="0       0.12157 -0.0257"/>
+      <geometry>
+        <box size="0.06 0.07 0.23"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="left_rear_arm">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="1.57079  0    1.57079" xyz="0  0     0"/>
+      <inertia ixx="6.8125e-4" ixy="0" ixz="0" iyy="3.96253e-3" iyz="0" izz="4.53125e-3"/>
+    </inertial>
+    <collision name="collision_left_rear_arm_wheel_1">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0     0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".09"/>
+      </geometry>
+    </collision>
+    <collision name="collision_left_rear_arm_wheel_2">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0.23   0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".035"/>
+      </geometry>
+    </collision>
+    <collision name="left_rear_track_collision">
+      <origin rpy="-1.3293  0      0" xyz="0       0.12157 -0.0257"/>
+      <geometry>
+        <box size="0.06 0.07 0.2233"/>
+      </geometry>
+    </collision>
+    <collision name="left_rear_track_collision_2">
+      <origin rpy="1.3293  0      0" xyz="0       0.12157  0.0277"/>
+      <geometry>
+        <box size="0.06 0.07 0.23"/>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin rpy="0  0  0" xyz="0     0.115  0.001"/>
+      <geometry>
+        <box size=".002 .23 .05"/>
+      </geometry>
+    </visual>
+    <visual name="visual_left_rear_arm_wheel_1">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0     0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".09"/>
+      </geometry>
+    </visual>
+    <visual name="visual_left_rear_arm_wheel_2">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0.23   0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".035"/>
+      </geometry>
+    </visual>
+    <visual name="left_rear_track_visual">
+      <origin rpy="1.3293  0      0" xyz="0       0.12157  0.0277"/>
+      <geometry>
+        <box size="0.06 0.07 0.2233"/>
+      </geometry>
+    </visual>
+    <visual name="left_rear_track_visual_2">
+      <origin rpy="-1.3293  0      0" xyz="0       0.12157 -0.0257"/>
+      <geometry>
+        <box size="0.06 0.07 0.23"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="right_front_arm">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="1.57  0    1.57" xyz="0  0     0"/>
+      <inertia ixx="6.8125e-4" ixy="0" ixz="0" iyy="3.96253e-3" iyz="0" izz="4.53125e-3"/>
+    </inertial>
+    <collision name="collision_right_front_arm_wheel_1">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0     0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".09"/>
+      </geometry>
+    </collision>
+    <collision name="collision_right_front_arm_wheel_2">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0    -0.23   0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".035"/>
+      </geometry>
+    </collision>
+    <collision name="right_front_track_collision">
+      <origin rpy="-1.3293  0      0" xyz="0      -0.12157  0.0277"/>
+      <geometry>
+        <box size="0.06 0.07 0.2233"/>
+      </geometry>
+    </collision>
+    <collision name="right_front_track_collision_2">
+      <origin rpy="1.3293  0      0" xyz="0      -0.12157 -0.0257"/>
+      <geometry>
+        <box size="0.06 0.07 0.23"/>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin rpy="0  0  0" xyz="0    -0.115  0.001"/>
+      <geometry>
+        <box size=".002 .23 .05"/>
+      </geometry>
+    </visual>
+    <visual name="visual_right_front_arm_wheel_1">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0     0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".09"/>
+      </geometry>
+    </visual>
+    <visual name="visual_right_front_arm_wheel_2">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0    -0.23   0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".035"/>
+      </geometry>
+    </visual>
+    <visual name="right_front_track_visual">
+      <origin rpy="-1.3293  0      0" xyz="0      -0.12157  0.0277"/>
+      <geometry>
+        <box size="0.06 0.07 0.2233"/>
+      </geometry>
+    </visual>
+    <visual name="right_front_track_visual_2">
+      <origin rpy="1.3293  0      0" xyz="0      -0.12157 -0.0257"/>
+      <geometry>
+        <box size="0.06 0.07 0.23"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="left_front_arm">
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="1.57  0    1.57" xyz="0  0     0"/>
+      <inertia ixx="6.8125e-4" ixy="0" ixz="0" iyy="3.96253e-3" iyz="0" izz="4.53125e-3"/>
+    </inertial>
+    <collision name="collision_left_front_arm_wheel_1">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0     0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".09"/>
+      </geometry>
+    </collision>
+    <collision name="collision_left_front_arm_wheel_2">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0    -0.23   0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".035"/>
+      </geometry>
+    </collision>
+    <collision name="left_front_track_collision">
+      <origin rpy="-1.3293  0      0" xyz="0      -0.12157  0.0277"/>
+      <geometry>
+        <box size="0.06 0.07 0.2233"/>
+      </geometry>
+    </collision>
+    <collision name="left_front_track_collision_2">
+      <origin rpy="1.3293  0      0" xyz="0      -0.12157 -0.0257"/>
+      <geometry>
+        <box size="0.06 0.07 0.23"/>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin rpy="0  0  0" xyz="0    -0.115  0.001"/>
+      <geometry>
+        <box size=".002 .23 .05"/>
+      </geometry>
+    </visual>
+    <visual name="visual_left_front_arm_wheel_1">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0     0     0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".09"/>
+      </geometry>
+    </visual>
+    <visual name="visual_left_front_arm_wheel_2">
+      <origin rpy="3.14159 -1.57079  3.14159" xyz="0    -0.23   0.001"/>
+      <geometry>
+        <cylinder length=".06" radius=".035"/>
+      </geometry>
+    </visual>
+    <visual name="left_front_track_visual">
+      <origin rpy="-1.3293  0      0" xyz="0      -0.12157  0.0277"/>
+      <geometry>
+        <box size="0.06 0.07 0.2233"/>
+      </geometry>
+    </visual>
+    <visual name="left_front_track_visual_2">
+      <origin rpy="1.3293  0      0" xyz="0      -0.12157 -0.0257"/>
+      <geometry>
+        <box size="0.06 0.07 0.23"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="base">
+    <inertial>
+      <mass value="1.2"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001087473" iyy="0.001087473" izz="0.001092437" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <collision name="base_collision">
+      <origin  rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05867" radius="0.04267"/>
+      </geometry>
+    </collision>
+    <visual name="base_visual">
+      <origin  rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05867" radius="0.04267"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="top">
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0.036785" rpy="0 0 0"/>
+      <inertia ixx="0.000090623" iyy="0.000090623" izz="0.000091036" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <collision name="top_collision">
+      <origin xyz="0 0 0.036785" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length=".07357" radius=".04267"/>
+      </geometry>
+    </collision>
+    <visual name="top_visual">
+      <origin xyz="0 0 0.036785" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length=".07357" radius=".04267"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.001"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size=".001 .001 .001"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="ir_base">
+    <inertial>
+      <mass value="0.001"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="ir_front">
+    <inertial>
+      <mass value="0.001"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <gazebo reference="top">
+    <sensor type="gpu_ray" name="VLP16">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>1875</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.1415926535897931</min_angle>
+            <max_angle>+3.1415926535897931</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>16</samples>
+            <resolution>1</resolution>
+            <min_angle>-0,261799</min_angle>
+            <max_angle>0.261799</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.3</min>
+          <max>131.0</max>
+          <resolution>0.001</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.0</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_velodyne_gpu_laser.so">
+        <topicName>/jaguar/laser/scan</topicName>
+        <frameName>top</frameName>
+        <min_range>0.9</min_range>
+        <max_range>130</max_range>
+        <gaussianNoise>0.01</gaussianNoise>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+  <gazebo reference="ir_base">        
+    <sensor type="ray" name="ir_leftabc">
+      <pose>0 0 0 0 0 0</pose>
+          <update_rate>5</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>5</samples>
+                <resolution>1.0</resolution>
+                <min_angle>-0.25</min_angle>
+                <max_angle>0.25</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>5</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.25</min_angle>
+                <max_angle>0.25</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.01</min>
+              <max>1</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+      <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+         <gaussianNoise>0.005</gaussianNoise>
+         <alwaysOn>true</alwaysOn>
+         <updateRate>5</updateRate>
+         <topicName>/floor_distance</topicName>
+         <frameName>ir_base</frameName>
+         <visualize>true</visualize>
+         <radiation>ultrasonic</radiation>
+         <fov>0.5</fov>
+      </plugin>
+    </sensor>            
+  </gazebo>
+
+  <gazebo reference="ir_front">        
+    <sensor type="ray" name="ir_frontabc">
+      <pose>0 0 0 0 0 0</pose>
+          <update_rate>5</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1</samples>
+                <resolution>1.0</resolution>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <resolution>1</resolution>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.01</min>
+              <max>0.9</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+      <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+         <gaussianNoise>0.005</gaussianNoise>
+         <alwaysOn>true</alwaysOn>
+         <updateRate>5</updateRate>
+         <topicName>/front_distance</topicName>
+         <frameName>ir_front</frameName>
+         <visualize>true</visualize>
+         <radiation>infrared</radiation>
+         <fov>0.5</fov>
+      </plugin>
+    </sensor>            
+  </gazebo>
+
+  <gazebo reference="left_track_j">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+  <gazebo reference="right_track_j">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+  <gazebo reference="velodyne_base_j">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+  <gazebo reference="imu_joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+  <gazebo reference="ir_joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+  <gazebo reference="ir_front_joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+
+
+  <gazebo>
+        <plugin name="jaguar_plugin" filename="/home/alberto/jaguar_plugin/build/libjaguar_plugin.so">
+            <velocity>0</velocity>
+            <flipperTopicName>/cmd_flipper</flipperTopicName>
+            <right_front_joint>right_front_track_j</right_front_joint>
+            <left_front_joint>left_front_track_j</left_front_joint>
+            <right_rear_joint>right_rear_track_j</right_rear_joint>
+            <left_rear_joint>left_rear_track_j</left_rear_joint>
+            <updateRate>0.0</updateRate>>
+        </plugin>
+  </gazebo>
+  <gazebo>
+        <plugin filename="/home/alberto/code/gazebo/build/plugins/libSimpleTrackedVehiclePlugin.so" name="simple_tracked_vehicle">
+                <body>base_link</body>
+                <cmdVelTopicName>/cmd_vel</cmdVelTopicName>
+                <left_track>left_track</left_track>
+                <right_track>right_track</right_track>
+                <rear_left_track>left_rear_arm</rear_left_track>
+                <rear_right_track>right_rear_arm</rear_right_track>
+                <front_left_track>left_front_arm</front_left_track>
+                <front_right_track>right_front_arm</front_right_track>
+                <track_mu>2</track_mu>
+                <track_mu2>0.5</track_mu2>
+        </plugin>
+  </gazebo>
+
+</robot>
