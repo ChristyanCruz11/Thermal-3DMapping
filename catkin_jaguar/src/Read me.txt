@@ -1,0 +1,7 @@
+
+1 Install Joy_node
+- sudo apt-get install ros-melodic-joy
+
+2 make source to /catkin_jaguar
+
+3 IN: /catkin_jaguar  >> catkin_make
